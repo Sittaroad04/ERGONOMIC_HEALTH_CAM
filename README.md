@@ -75,7 +75,7 @@ ALERT_COOLDOWN_SECONDS=15
 **Terminal 1: Backend**
 
 ```powershell
-cd c:\code_project\endPro
+cd ERGONOMIC_HEALTH_CAM
 .\.venv\Scripts\Activate.ps1
 uvicorn backend.main:app --reload --port 8000
 ```
@@ -83,7 +83,7 @@ uvicorn backend.main:app --reload --port 8000
 **Terminal 2: Frontend**
 
 ```powershell
-cd c:\code_project\endPro\frontend
+cd frontend
 npm run dev
 ```
 
