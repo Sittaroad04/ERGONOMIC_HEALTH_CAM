@@ -2,6 +2,7 @@ import asyncio
 import json
 import time
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi.encoders import jsonable_encoder
 from ..database import SessionLocal
 from ..models import Alert
 from ..services.risk_monitor import RiskMonitor
@@ -30,7 +31,7 @@ async def monitor(websocket: WebSocket, session_id: int):
                 db.add(Alert(session_id=session_id, alert_type=alert_type, message=alert_message, severity=result["risk_level"]))
                 db.commit()
                 result["warning"] = alert_message
-            await websocket.send_json(result)
+            await websocket.send_json(jsonable_encoder(result))
             await asyncio.sleep(0.08)
     except (WebSocketDisconnect, json.JSONDecodeError):
         pass
