@@ -77,6 +77,8 @@ ALERT_COOLDOWN_SECONDS=15
 ```powershell
 cd ERGONOMIC_HEALTH_CAM
 .\.venv\Scripts\Activate.ps1
+ถ้าไม่ได้ เปลี่ยนเป็น
+.\.venv\Scripts\Activate.bat
 uvicorn backend.main:app --reload --port 8000
 ```
 
