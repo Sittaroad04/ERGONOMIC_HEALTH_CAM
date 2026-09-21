@@ -19,10 +19,13 @@ def analyze_payload(session_id: int, image_data: str | None, db: Session, persis
     if not session:
         raise HTTPException(404, "Session not found")
     landmarks = detector.detect(image_data, view=view)
+    print(f"DEBUG: Landmarks from detector: {landmarks}")
     angles = calculate_angles(landmarks)
+    timestamp = datetime.now(timezone.utc)
+    if not angles:
+        return {"timestamp": timestamp, "posture_status": None, "risk_level": None, "rula_score": None, "angles": None, "landmarks": {}, "selected_side": None, "view": view, "recommendations": [], "rula_breakdown": None}
     rula = assess_rula(angles)
     status, recommendations = classify_posture(angles, rula.risk_level)
-    timestamp = datetime.now(timezone.utc)
     stored_angle_keys = {
         "neck_angle", "trunk_angle", "left_elbow_angle", "right_elbow_angle",
         "left_hip_angle", "right_hip_angle", "left_knee_angle", "right_knee_angle",

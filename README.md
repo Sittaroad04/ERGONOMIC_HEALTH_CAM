@@ -32,7 +32,7 @@ Webcam -> React sampling -> WebSocket -> FastAPI -> MediaPipe Pose
 ```powershell
 cd c:\code_project\endPro
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.bat
 python -m pip install --upgrade pip
 pip install -r backend\requirements.txt
 cd frontend
@@ -75,8 +75,13 @@ ALERT_COOLDOWN_SECONDS=15
 **Terminal 1: Backend**
 
 ```powershell
+<<<<<<< HEAD
 cd ERGONOMIC_HEALTH_CAM
 .\.venv\Scripts\Activate.ps1
+=======
+cd c:\code_project\endPro
+.\.venv\Scripts\Activate.bat
+>>>>>>> bf1f9e4 (update camera and risk features)
 uvicorn backend.main:app --reload --port 8000
 ```
 

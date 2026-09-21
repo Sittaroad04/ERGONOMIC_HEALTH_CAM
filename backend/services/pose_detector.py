@@ -40,26 +40,26 @@ class PoseDetector:
                     "right_hip": 24,
                 }
                 visible = [points[index].visibility for index in back_indices.values()]
-                if sum(visible) / len(visible) < 0.45:
+                if sum(visible) / len(visible) < 0.1:
                     return None
                 self.last_selected_side = "back"
                 return {
                     name: (points[index].x, points[index].y)
                     for name, index in back_indices.items()
-                    if points[index].visibility >= 0.45
+                    if points[index].visibility >= 0.1
                 }
             visibility = {
                 side: sum(points[index].visibility for index in indices.values()) / len(indices)
                 for side, indices in side_indices.items()
             }
             selected = max(visibility, key=visibility.get)
-            if visibility[selected] < 0.45:
+            if visibility[selected] < 0.1:
                 return None
             self.last_selected_side = selected
             return {
                 name: (points[index].x, points[index].y)
                 for name, index in side_indices[selected].items()
-                if points[index].visibility >= 0.45
+                if points[index].visibility >= 0.1
             }
         except (ValueError, IndexError, cv2.error):
             return None

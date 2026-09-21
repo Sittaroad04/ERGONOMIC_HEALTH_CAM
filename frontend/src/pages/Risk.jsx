@@ -89,7 +89,7 @@ export default function Risk() {
     <div className="page-container">
       <div className="page-heading compact">
         <div>
-ฃ          <h1>
+          <h1>
             ความเสี่ยงจากท่าทางการนั่ง
           </h1>
           <p>ดูแนวโน้มท่านั่งจากข้อมูลที่สะสมไว้ในแต่ละช่วงเวลา</p>

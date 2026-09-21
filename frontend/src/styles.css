@@ -649,6 +649,23 @@ select {
   height: 100%;
   object-fit: cover;
 }
+.camera-frame .pose-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.camera-frame .pose-overlay line {
+  stroke: #2a9d8f;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+.camera-frame .pose-overlay circle {
+  fill: #f1a287;
+  stroke: #fff;
+  stroke-width: 2px;
+}
 .camera-meta {
   position: absolute;
   left: 16px;

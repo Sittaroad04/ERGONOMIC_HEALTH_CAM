@@ -46,18 +46,22 @@ export default function Dashboard({ onNavigate }) {
       setSession(item);
       setActive(true);
       socketRef.current = openMonitorSocket(item.id, (next) => {
+      console.log("Received data:", next);
+      console.log("Landmarks:", next.landmarks);
       setResult(next);
-      setSeries((prev) => [
-        ...prev.slice(-29),
-        {
-          time: new Date(next.timestamp).toLocaleTimeString([], {
-            minute: "2-digit",
-            second: "2-digit",
-          }),
-          ...next.angles,
-          rula_score: next.rula_score,
-        },
-      ]);
+      if (next.angles) {
+        setSeries((prev) => [
+          ...prev.slice(-29),
+          {
+            time: new Date(next.timestamp).toLocaleTimeString([], {
+              minute: "2-digit",
+              second: "2-digit",
+            }),
+            ...next.angles,
+            rula_score: next.rula_score,
+          },
+        ]);
+      }
       const now = Date.now();
       if (next.risk_level === "HIGH" || next.risk_level === "VERY HIGH") {
         badStartRef.current ??= now;
@@ -179,7 +183,7 @@ export default function Dashboard({ onNavigate }) {
               {active ? "Watching" : "Ready"}
             </span>
           </div>
-          <Camera active={active} onFrame={sendFrame} onCapture={captureFrame} onError={setCameraError} view={view} />
+          <Camera active={active} onFrame={sendFrame} onCapture={captureFrame} onError={setCameraError} view={view} landmarks={result?.landmarks} />
           <div className="camera-panel-foot">
             <span>
               <i className="foot-dot" />

@@ -38,9 +38,9 @@ def _wrist_deviation(elbow: tuple[float, float], wrist: tuple[float, float]) -> 
     return round(abs(degrees(atan2(dy, dx))), 1)
 
 
-def calculate_angles(landmarks: dict[str, tuple[float, float]] | None = None) -> dict[str, float]:
+def calculate_angles(landmarks: dict[str, tuple[float, float]] | None = None) -> dict[str, float] | None:
     if not landmarks:
-        return {"neck_angle": 18.0, "neck_extension": False, "trunk_angle": 12.0, "upper_arm_angle": 20.0, "left_elbow_angle": 92.0, "right_elbow_angle": 0.0, "left_hip_angle": 88.0, "right_hip_angle": 0.0, "left_knee_angle": 94.0, "right_knee_angle": 0.0, "wrist_angle": 0.0}
+        return None
     get = lambda name: landmarks.get(name, (0.0, 0.0))
     shoulder = get("shoulder")
     hip = get("hip")
